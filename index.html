@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC Cabelinho - Show 2027</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+body{overflow-x:hidden;color:#fff;background:#0b0b0b;position:relative;}
+
+/* ===== PARTICULAS DE FUNDO ===== */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* ===== CABEÇALHO ===== */
+header{position:sticky;top:0;z-index:1000;text-align:center;font-size:38px;font-weight:bold;padding:25px 0;background:linear-gradient(90deg,#8a2be2,#9400d3,#4b0082);text-shadow:0 0 15px #00ff88,0 0 25px #8a2be2;}
+
+/* ===== MENU ===== */
+.menu{display:flex;justify-content:center;gap:15px;margin:15px 0;flex-wrap:wrap;z-index:1;position:relative;}
+.menu button{padding:12px 22px;border:none;border-radius:12px;cursor:pointer;font-weight:bold;font-size:14px;color:#fff;background:#00ff88;box-shadow:0 0 8px #00ff88;transition:all 0.3s;}
+.menu button:hover{background:#8a2be2;box-shadow:0 0 20px #8a2be2,0 0 40px #00ff88;}
+
+/* ===== BOXES ===== */
+.box{max-width:1000px;margin:20px auto;background:rgba(20,0,40,0.9);padding:30px;border-radius:20px;display:none;backdrop-filter:blur(6px);border:2px solid #8a2be2;box-shadow:0 0 25px #8a2be2;animation:fadeIn 0.6s ease;transition:transform 0.3s;position:relative;z-index:1;}
+.box:hover{transform:translateY(-5px);}
+.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== IMAGENS ===== */
+img{width:100%;border-radius:14px;margin:15px 0;}
+
+/* ===== TÍTULOS ===== */
+h2{text-shadow:0 0 10px #00ff88,0 0 20px #8a2be2;margin-bottom:12px;}
+h3{text-shadow:0 0 6px #00ff88,0 0 12px #8a2be2;margin:12px 0 8px 0;}
+
+/* ===== MÚSICAS ===== */
+.musicas li{margin:8px 0;padding:8px;background:#222;border-left:5px solid #00ff88;border-radius:6px;transition:all 0.3s;}
+.musicas li:hover{background:#111;border-left:5px solid #8a2be2;}
+
+/* ===== PLAYER ===== */
+.audio-player{margin:15px 0;text-align:center;}
+.audio-player audio{width:100%;border-radius:12px;}
+
+/* ===== INGRESSOS ===== */
+.ingressos{margin:12px 0;font-size:16px;}
+.comprar-btn{padding:14px 30px;background:#00ff88;color:#000;border:none;border-radius:12px;font-weight:bold;cursor:pointer;box-shadow:0 0 12px #00ff88,0 0 20px #8a2be2;transition:all 0.3s;}
+.comprar-btn:hover{background:#8a2be2;color:#fff;box-shadow:0 0 25px #8a2be2,0 0 40px #00ff88;}
+select{padding:10px 15px;border-radius:8px;border:2px solid #00ff88;background:#111;color:#fff;font-weight:bold;margin:8px 0;cursor:pointer;transition:all 0.3s;}
+select:hover{border-color:#8a2be2;}
+
+/* ===== MAPA ===== */
+.mapa img{width:100%;border-radius:14px;margin:12px 0;transition:transform 0.3s, box-shadow 0.3s;}
+.mapa img:hover{transform:scale(1.02);box-shadow:0 0 20px #00ff88;}
+
+/* ===== GALERIA ===== */
+.gallery img{width:32%;margin:1%;border-radius:10px;transition:transform 0.3s;}
+.gallery img:hover{transform:scale(1.05);}
+
+/* ===== FAQ ===== */
+.faq p{margin:8px 0;padding:8px;background:#111;border-left:5px solid #00ff88;border-radius:6px;}
+
+/* ===== RODAPÉ ===== */
+footer{text-align:center;padding:20px;margin-top:20px;background:#111;border-top:2px solid #8a2be2;color:#aaa;font-size:14px;}
+
+/* ===== FUNDO ANIMADO ===== */
+@keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+body{background:linear-gradient(-45deg,#0b0b0b,#1a001a,#0b0b0b,#1a001a);background-size:400% 400%;animation:gradientBG 20s ease infinite;}
+
+/* ===== RWD ===== */
+@media(max-width:768px){.menu{flex-direction:column;}.gallery img{width:49%;margin:0.5%;}}
+</style>
+</head>
+
+<body>
+
+<!-- PARTICULAS -->
+<canvas class="particles"></canvas>
+
+<header>MC Cabelinho - Show 2027</header>
+
+<div class="menu">
+    <button onclick="trocarPagina('perfil')">Perfil</button>
+    <button onclick="trocarPagina('evento')">Evento</button>
+    <button onclick="trocarPagina('lineup')">Line-up</button>
+    <button onclick="trocarPagina('ingresso')">Ingressos</button>
+    <button onclick="trocarPagina('comida')">Comidas & Bebidas</button>
+    <button onclick="trocarPagina('faq')">FAQ</button>
+    <button onclick="trocarPagina('galeria')">Galeria</button>
+    <button onclick="trocarPagina('contato')">Contato</button>
+</div>
+
+<!-- PERFIL -->
+<div class="box active" id="perfil">
+    <h2>Sobre MC Cabelinho</h2>
+    <img src="https://i.imgur.com/mGQxAk3.jpeg" alt="MC Cabelinho">
+    <p>MC Cabelinho começou sua carreira nas favelas, compondo e cantando em batalhas de rap.  
+    Com talento nato, ganhou destaque nas redes sociais e plataformas digitais, tornando-se um dos maiores nomes do trap e funk brasileiro.</p>
+
+    <h3>Músicas mais tocadas</h3>
+    <ul class="musicas">
+        <li>Minha Cura</li>
+        <li>Fogo & Gasolina</li>
+        <li>Um Brinde</li>
+        <li>Louco de Catuçaí</li>
+    </ul>
+
+    <div class="audio-player">
+        <h3>Ouça um Hit:</h3>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+    </div>
+</div>
+
+<!-- EVENTO -->
+<div class="box" id="evento">
+    <h2>Informações do Evento</h2>
+    <p><strong>Data:</strong> 15 de Julho de 2027</p>
+    <p><strong>Hora de abertura dos portões:</strong> 18:00</p>
+    <p><strong>Horário do show:</strong> 20:00</p>
+    <p><strong>Local:</strong> Arena Central, Rua do Festival, 123 – Cidade XYZ</p>
+    <p><strong>Capacidade prevista:</strong> 15.000 pessoas</p>
+    <h3>Programação</h3>
+    <ul class="musicas">
+        <li>18:00 – Abertura do evento e DJ Set</li>
+        <li>19:00 – MC Matue</li>
+        <li>20:00 – MC Cabelinho</li>
+        <li>22:00 – Show surpresa / Encerramento</li>
+    </ul>
+    <h3>Experiência VIP</h3>
+    <ul class="musicas">
+        <li>Entrada exclusiva no camarote</li>
+        <li>Bebidas premium inclusas</li>
+        <li>Merchandising oficial do artista</li>
+        <li>Meet & Greet com MC Cabelinho</li>
+    </ul>
+    <h3>Transportes e Estacionamento</h3>
+    <ul class="musicas">
+        <li>Estacionamento oficial pago próximo ao local</li>
+        <li>Rotas de ônibus e metrô próximas</li>
+        <li>Aplicativos de carona recomendados</li>
+    </ul>
+    <h3>Segurança e Regras</h3>
+    <ul class="musicas">
+        <li>Proibido entrada com bebidas e alimentos externos</li>
+        <li>Não é permitido armas ou objetos cortantes</li>
+        <li>Equipe de segurança e primeiros socorros presentes</li>
+    </ul>
+    <h3>Promoções</h3>
+    <ul class="musicas">
+        <li>Combo de 4 ingressos com desconto</li>
+        <li>Descontos para fãs cadastrados</li>
+    </ul>
+</div>
+
+<!-- LINE-UP -->
+<div class="box" id="lineup">
+    <h2>Line-up Completo</h2>
+    <ul class="musicas">
+        <li>MC Cabelinho – Funk</li>
+        <li>MC Matue – Trap</li>
+        <li>MC Cabelo Louco – Trap</li>
+        <li>DJ Flash – Abertura do show</li>
+    </ul>
+</div>
+
+<!-- INGRESSOS -->
+<div class="box" id="ingresso">
+    <h2>Ingressos</h2>
+    <label for="tipo-ingresso">Selecione o tipo de ingresso:</label><br>
+    <select id="tipo-ingresso" onchange="atualizarPreco()">
+        <option value="meia">Meia Entrada - R$120</option>
+        <option value="inteira">Inteira - R$200</option>
+        <option value="vip">VIP - R$450</option>
+    </select>
+    <div class="ingressos" id="preco-ingresso">Preço: R$120</div>
+
+    <h3>Mapa do Evento</h3>
+    <div class="mapa">
+        <img src="https://i.imgur.com/Ov5rRkx.png" alt="Mapa do Evento">
+        <p style="text-align:center;">🔹 Palco | 🔸 Área VIP | 🔺 Bebidas</p>
+    </div>
+    <button class="comprar-btn" onclick="comprar()">Comprar Ingresso</button>
+</div>
+
+<!-- COMIDAS E BEBIDAS -->
+<div class="box" id="comida">
+    <h2>Comidas & Bebidas</h2>
+    <ul class="musicas">
+        <li>Água - R$5</li>
+        <li>Suco - R$10</li>
+        <li>Refrigerante - R$8</li>
+        <li>Comida rápida - R$15</li>
+    </ul>
+</div>
+
+<!-- FAQ -->
+<div class="box" id="faq">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq">
+        <p>Q: Posso entrar com mochila? <br> A: Sim, porém apenas pequena e sem objetos proibidos.</p>
+        <p>Q: Existe estacionamento? <br> A: Sim, estacionamento pago disponível próximo ao local.</p>
+        <p>Q: Qual horário do show? <br> A: O show começa às 20h, portões abertos às 18h.</p>
+    </div>
+</div>
+
+<!-- GALERIA -->
+<div class="box" id="galeria">
+    <h2>Galeria</h2>
+    <div class="gallery">
+        <img src="https://i.imgur.com/mGQxAk3.jpeg" alt="Show 1">
+        <img src="https://i.imgur.com/Ov5rRkx.png" alt="Show 2">
+        <img src="https://i.imgur.com/mGQxAk3.jpeg" alt="Show 3">
+    </div>
+</div>
+
+<!-- CONTATO -->
+<div class="box" id="contato">
+    <h2>Contato & Redes Sociais</h2>
+    <p>Instagram: <a href="https://instagram.com" target="_blank" style="color:#00ff88;">@mc_cabelinho</a></p>
+    <p>TikTok: <a href="https://tiktok.com" target="_blank" style="color:#00ff88;">@mc_cabelinho</a></p>
+    <p>WhatsApp: <a href="https://wa.me/5511999999999" target="_blank" style="color:#00ff88;">Clique para enviar mensagem</a></p>
+</div>
+
+<footer>
+    © 2027 MC Cabelinho - Todos os direitos reservados
+</footer>
+
+<script>
+// Trocar páginas
+function trocarPagina(id){
+    document.querySelectorAll('.box').forEach(b=>b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+}
+
+// Atualizar preço
+function atualizarPreco(){
+    const tipo=document.getElementById('tipo-ingresso').value;
+    let preco=tipo==='meia'?120:tipo==='inteira'?200:450;
+    document.getElementById('preco-ingresso').innerText=`Preço: R$${preco}`;
+}
+
+// Simula compra
+function comprar(){
+    const tipo=document.getElementById('tipo-ingresso').value;
+    alert(`Compra realizada!\nTipo: ${tipo}\nAproveite o show do MC Cabelinho! 🎤🔥`);
+}
+
+// PARTICULAS DE FUNDO
+const canvas=document.querySelector('.particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+let particlesArray=[];
+class Particle{
+    constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=Math.random()*2-1;this.speedY=Math.random()*2-1;}
+    update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;if(this.y<0)this.y=canvas.height;}
+    draw(){ctx.fillStyle='#8a2be2';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}
+}
+function init(){particlesArray=[];for(let i=0;i<150;i++){particlesArray.push(new Particle());}}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+init();animate();
+window.addEventListener('resize',function(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;init();});
+</script>
+
+</body>
+</html>
+
+
+
+
